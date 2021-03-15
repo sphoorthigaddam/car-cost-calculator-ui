@@ -1,6 +1,5 @@
 import './App.css';
 import CalculateForm from './CalculateForm';
-import CostCalculator from './CostCalculator.js'
 
 function App() {
 	return (
