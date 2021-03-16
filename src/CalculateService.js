@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -27,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 		}
 	}
 }));
-
 export default function CalculateService() {
 	const classes = useStyles();
 
@@ -70,7 +70,6 @@ export default function CalculateService() {
 				setCost(response.data.cost);
 			})
 			.catch(function(error) {
-				console.log(error.message);
 				alert(error.response.data.message);
 			});
 	}
@@ -90,7 +89,7 @@ export default function CalculateService() {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Container fixed>
+			<Container maxWidth="xl">
 				<FormControl className={classes.formControl}>
 					<InputLabel htmlFor="choose-car-type">Car Type</InputLabel>
 					<NativeSelect
@@ -175,7 +174,7 @@ export default function CalculateService() {
 
 				<FormControl className={classes.formControl}>
 					<FormGroup row>
-						{Object.keys(boolOptions).map((checkbox) => {
+						{Object.keys(boolOptions).map((checkbox, index) => {
 							return (
 								<FormControlLabel
 									control={
@@ -201,7 +200,12 @@ export default function CalculateService() {
 
 				<FormControl>
 					<FormGroup row>
-						<Button variant="contained" color="primary" onClick={() => handleSubmit(type)} className={classes.margin}>
+						<Button
+							variant="contained"
+							color="primary"
+							onClick={() => handleSubmit(type)}
+							className={classes.margin}
+						>
 							Calculate Cost
 						</Button>
 						<Button variant="outlined" color="secondary" className={classes.margin}>
@@ -209,7 +213,14 @@ export default function CalculateService() {
 						</Button>
 					</FormGroup>
 				</FormControl>
-				{cost ? <h1>Cost of the car is {cost}</h1> : null}
+
+				{cost ? (
+					<div className={classes.root}>
+						<Typography variant="h5" gutterBottom>
+							Cost of the car is {cost}
+						</Typography>
+					</div>
+				) : null}
 			</Container>
 		</React.Fragment>
 	);
