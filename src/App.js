@@ -1,11 +1,8 @@
 import './App.css';
-import CalculateForm from './CalculateForm';
+import CalculateService from './CalculateService';
 
-function App() {
+export default function App() {
 	return (
-		<div className="App">
-			<CalculateForm/>
-		</div>
+		<CalculateService/>
 	);
 }
-export default App;
