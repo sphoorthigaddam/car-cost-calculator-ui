@@ -217,7 +217,7 @@ export default function CalculateService() {
 				{cost ? (
 					<div className={classes.root}>
 						<Typography variant="h5" gutterBottom>
-							Cost of the car is {cost}
+							Cost of the car is <strong>${cost}</strong>
 						</Typography>
 					</div>
 				) : null}
