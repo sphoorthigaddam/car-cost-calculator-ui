@@ -10,11 +10,11 @@ export default function CalculateService() {
 		towPackage: false,
 		navigation: false
 	});
-    const [ engine, setEngine ] = useState('');
-    const [ audio, setAudio ] = useState('');
-    const [ transmission, setTransmission ] = useState('');
-    const [ roofType, setRoofTyoe ] = useState('');
-
+	const [ engine, setEngine ] = useState('');
+	const [ audio, setAudio ] = useState('');
+	const [ transmission, setTransmission ] = useState('');
+	const [ roofType, setRoofTyoe ] = useState('');
+	const [ zip, setZip ] = useState('');
 
 	function handleSubmit(type) {
 		var config = {
@@ -28,11 +28,12 @@ export default function CalculateService() {
 				selectedOptions: {
 					navigation: boolOptions.navigation,
 					towPackage: boolOptions.towPackage,
-                    audio: audio,
-                    engine: engine,
-                    transmission: transmission,
-                    roofType: roofType
-				}
+					audio: audio,
+					engine: engine,
+					transmission: transmission,
+					roofType: roofType
+				},
+				destinationZip: zip
 			}
 		};
 
@@ -58,47 +59,60 @@ export default function CalculateService() {
 			<CssBaseline />
 			<Container fixed>
 				<div>
+					<strong> Choose a car type </strong>
 					<select onChange={(event) => setType(event.target.value)} defaultValue={'DEFAULT'}>
-						<option value="DEFAULT" disabled>
-							Choose a car type ...
+						<option value='DEFAULT' disabled>
+							select
 						</option>
-						<option value="coupe">Coupe</option>
-						<option value="suv">Suv</option>
-						<option value="truck">Truck</option>
-						<option value="luxury_sedan">Luxury Sedan</option>
+						<option value='coupe'>Coupe</option>
+						<option value='suv'>Suv</option>
+						<option value='truck'>Truck</option>
+						<option value='luxury_sedan'>Luxury Sedan</option>
 					</select>
-                </div>
-                <div>
-                    <select id={engine} onChange={(event) => setEngine(event.target.value)} defaultValue={'DEFAULT'}>
-						<option value="DEFAULT" disabled>
-							Choose an engine...
-						</option>
-						<option value="v8">V8</option>
+				</div>
+				<div>
+					<div>
+					<strong> Choose an engine type </strong>
+					<select id={engine} onChange={(event) => setEngine(event.target.value)} defaultValue={'DEFAULT'}>
+						<option value=''>select</option>
+						<option value='v8'>V8</option>
 					</select>
+					</div>
 
-                    <select id={audio} onChange={(event) => setAudio(event.target.value)} defaultValue={'DEFAULT'}>
-						<option value="DEFAULT" disabled>
-							Choose audio...
-						</option>
-						<option value="premiumaudio">Premium Audio</option>
+					<div>
+					<strong> Choose an audio type </strong>
+					<select id={audio} onChange={(event) => setAudio(event.target.value)} defaultValue={'DEFAULT'}>
+						<option value=''>select</option>
+						<option value='premiumaudio'>Premium Audio</option>
 					</select>
+					</div>
 
-                    <select id={transmission} onChange={(event) => setTransmission(event.target.value)} defaultValue={'DEFAULT'}>
-						<option value="DEFAULT" disabled>
-							Choose a transmission...
-						</option>
-						<option value="automatic">Automatic</option>
+					<div>
+					<strong> Choose an audio type </strong>
+					<select
+						id={transmission}
+						onChange={(event) => setTransmission(event.target.value)}
+						defaultValue={'DEFAULT'}
+					>
+						<option value=''>select</option>
+						<option value='automatic'>Automatic</option>
 					</select>
+					</div>
 
-                    <select id={roofType} onChange={(event) => setRoofTyoe(event.target.value)} defaultValue={'DEFAULT'}>
-						<option value="DEFAULT" disabled>
-							Choose a roof type...
-						</option>
-						<option value="sunroof">Sun roof</option>
+					<div>
+					<strong> Choose an audio type </strong>
+					<select
+						id={roofType}
+						onChange={(event) => setRoofTyoe(event.target.value)}
+						defaultValue={'DEFAULT'}
+					>
+						<option value=''>rooftype</option>
+						<option value='sunroof'>Sun roof</option>
 					</select>
-                </div>
-                <div>
-					{Object.keys(boolOptions).map((checkbox, index) => {
+					</div>
+				</div>
+				<div>
+					{Object.keys(boolOptions).map((checkbox) => {
 						return (
 							<div key={checkbox + 'div'}>
 								<label>
@@ -113,9 +127,14 @@ export default function CalculateService() {
 							</div>
 						);
 					})}
-					<button onClick={() => handleSubmit(type)}>Click me</button>
-					<p>{cost}</p>
 				</div>
+				<div>
+					<label> Zipcode <input type="text" id={zip} onChange={(event) => setZip(event.target.value)}/> </label>
+				</div>
+				<div>
+					<button onClick={() => handleSubmit(type)}>Click me</button>
+				</div>
+				{cost ? <h1>Cost of the car is {cost}</h1> : null}
 			</Container>
 		</React.Fragment>
 	);
