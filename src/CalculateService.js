@@ -43,7 +43,12 @@ export default function CalculateService() {
 	const [ roofType, setRoofType ] = useState('');
 	const [ zip, setZip ] = useState('');
 
-	function handleSubmit(type) {
+	function handleReset() {
+		
+		
+	}
+
+	function handleSubmit() {
 		var config = {
 			method: 'post',
 			url: 'https://car-cost-calculator.herokuapp.com/api/v1/car/cost',
@@ -75,12 +80,6 @@ export default function CalculateService() {
 	}
 
 	function handleCheckbox(checkboxType, event) {
-		let temp = boolOptions;
-		temp[checkboxType] = event.target.checked + '';
-		setBoolOptions(temp);
-	}
-
-	function handleReset(checkboxType, event) {
 		let temp = boolOptions;
 		temp[checkboxType] = event.target.checked + '';
 		setBoolOptions(temp);
@@ -203,14 +202,19 @@ export default function CalculateService() {
 						<Button
 							variant="contained"
 							color="primary"
-							onClick={() => handleSubmit(type)}
+							onClick={() => handleSubmit()}
 							className={classes.margin}
 						>
 							Calculate Cost
 						</Button>
-						<Button variant="outlined" color="secondary" className={classes.margin}>
+						{/* <Button
+							variant="outlined"
+							color="secondary"
+							className={classes.margin}
+							onClick={() => handleReset()}
+						>
 							Reset
-						</Button>
+						</Button> */}
 					</FormGroup>
 				</FormControl>
 
